@@ -87,7 +87,7 @@ export class AppComponent {
           '{{nome do presidente}}',
           president.presidentName
         );
-        message = this.message.replace('{{nome da câmara}}', president.city);
+        message = message.replace('{{nome da câmara}}', president.city);
         emailMessages.push({
           message,
           copied: false,
