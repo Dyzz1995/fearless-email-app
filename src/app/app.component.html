@@ -1,0 +1,62 @@
+<ng-lottie
+  [options]="options2"
+  class="w-screen h-screen absolute opacity-10"
+  (animationCreated)="animationCreated2($event)"
+/>
+<div class="relative w-full h-full flex flex-col gap-16 items-center py-8">
+  <h1 class="text-6xl font-bold">Fearless Mega Email App</h1>
+
+  <div class="flex justify-center items-center">
+    <div class="w-full">
+      <div class="flex justify-between gap-4 items-center">
+        <h3 class="text-3xl font-bold">Upload Excel File</h3>
+        <input type="file" (change)="onFileChange($event)" />
+      </div>
+    </div>
+  </div>
+  <!-- copy-gif -->
+  <ng-lottie
+    [options]="options1"
+    width="500px"
+    height="500px"
+    [ngClass]="{
+    visible: emails.length > 0,
+    hidden: emails.length <= 0,
+  }"
+    (animationCreated)="animationCreated1($event)"
+  />
+  <div
+    class="flex flex-col gap-8 justify-center items-center px-4 py-4 rounded-2xl"
+  >
+    @for (emailMessage of emails; track $index) {
+    <div class="flex flex-row items-start">
+      @if (!emailMessage.copied) {
+      <div>
+        <div class="flex gap-2 items-center">
+          <h3 class="font-bold text-xl">Subject</h3>
+          <h2>{{ subject }}</h2>
+        </div>
+
+        <span #emailText [innerText]="emailMessage.message"></span>
+      </div>
+      } @if(emailMessage.copied) {
+      <app-copied-modal></app-copied-modal>
+
+      }
+
+      <button class="bg-transparent" (click)="copyText(emailMessage)">
+        <ng-lottie
+          [options]="options3"
+          width="100px"
+          height="100px"
+          [ngClass]="{
+        visible: emails.length > 0,
+        hidden: emails.length <= 0,
+      }"
+          (animationCreated)="animationCreated3($event)"
+        />
+      </button>
+    </div>
+    }
+  </div>
+</div>
